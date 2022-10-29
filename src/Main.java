@@ -1,6 +1,13 @@
-public class Main {
-    public static void main(String[] args) {
+import java.util.ArrayList;
 
-        Question2 q = new Question2();
+public class Main {
+
+
+    public static void main(String[] args) {
+        Question2 q1 = new Question2(1, false);
+        Question2 q2 = new Question2(2, false);
+        Question2 q3 = new Question2(4, false);
+        Question2 q4 = new Question2(8, false);
     }
+
 }
