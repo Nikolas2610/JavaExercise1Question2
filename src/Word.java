@@ -1,28 +1,17 @@
 public class Word {
     private String word;
-    private long wordCount=1;
+    private int wordCount=1;
 
-    public Word(String word) {
+    public Word(String word, int wordCount) {
         this.word = word;
+        this.wordCount = wordCount;
     }
 
     public String getWord() {
         return this.word;
     }
 
-    public long getWordCount() {
+    public int getWordCount() {
         return wordCount;
-    }
-
-    public void increaseWordCount() {
-        this.wordCount++;
-    }
-
-    public void addWordsCount(long words) {
-        this.wordCount += words;
-    }
-
-    public void printWord() {
-        System.out.println("Word " + getWord() + ": has " + getWordCount() + " appearances");
     }
 }
