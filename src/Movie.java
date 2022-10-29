@@ -14,10 +14,6 @@ public class Movie {
         return year;
     }
 
-    public int getId() {    // TODO: For DEBUG
-        return id;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -30,9 +26,7 @@ public class Movie {
 
         try {
             this.id = (int)Integer.parseInt(movie[0]);
-
             String categories;
-
 //      For movies that the title has "," | Size: 4
             if (movie.length > 3) {
                 this.title = "";
@@ -40,8 +34,6 @@ public class Movie {
                     this.title += movie[i] + ",";
                 }
                 this.title = this.title.substring(0, this.title.length()-1);
-//                this.title = movie[1] + "," + movie[2];
-//                categories = movie[3];
                 categories = movie[movie.length-1];
 
             } else {
@@ -59,7 +51,6 @@ public class Movie {
                     this.title = this.title.replace("\"","");
                 }
             }
-
 
 //        Split Categories
             String[] splitCategories = categories.split(splitCategoryBy);

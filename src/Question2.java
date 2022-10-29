@@ -2,18 +2,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Comparator;
 
 public class Question2 {
     String line = "";
     String splitColumnBy = ",";
-
     ArrayList<Movie> movieList = new ArrayList<>();
-
-    ArrayList<Year> yearList = new ArrayList<>();
-    ArrayList<Category> categoryList = new ArrayList<>();
-    ArrayList<Word> wordList = new ArrayList<>();
-
-//    int counter = 0;
+    HashMap<Integer, Integer> yearMap = new HashMap<>();
+    HashMap<String, Integer> wordMap = new HashMap<>();
+    HashMap<String, Integer> categoryMap = new HashMap<>();
 
     public Question2(int threadsCount, boolean printResult) {
         try {
@@ -21,12 +19,6 @@ public class Question2 {
             BufferedReader br = new BufferedReader(new FileReader("./data/movies.csv"));
             while ((line = br.readLine()) != null)   //returns a Boolean value
             {
-//                if (counter > 2000) {
-//                    System.out.println("Finish Reading");
-//                    break;
-//                } else {
-//                    counter++;
-//                }
                 String[] movie = line.split(splitColumnBy);    // use comma as separator
                 Movie m = new Movie(movie);
                 if (m.isCorrectRecord()) {
@@ -34,7 +26,7 @@ public class Question2 {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error");
+            System.err.println("There is a problem to read the file!");
             e.printStackTrace();
         }
 
@@ -62,107 +54,92 @@ public class Question2 {
             }
         }
 
-        for (int i = 0; i < threads.length; i++) {
-            if (i == 0) {
-                wordList.addAll(threads[i].getWordList());
-                categoryList.addAll(threads[i].getCategoryList());
-                yearList.addAll(threads[i].getYearList());
-            } else {
-                compineWordsList(threads[i].getWordList());
-                compineCategoryList(threads[i].getCategoryList());
-                compineYearList(threads[i].getYearList());
-            }
+        for (ProcessThread thread : threads) {
+            compineCategoryMap(thread.getCategoryMap());
+            compineYearMap(thread.getYearMap());
+            compineWordsMap(thread.getWordMap());
         }
-
 
         long end = System.currentTimeMillis();
         System.out.println("Duration for " + threadsCount + " threads: " + (end - start) + "msec");
         System.out.println("============END " + threadsCount + " THREAD============");
+
+//        Print data if is true from main
         if (printResult) {
             this.printData();
         }
-
-//        Print movies
-//        for (Movie movie : movieList) {
-//            movie.printMovie();
-//        }
-
-
     }
 
-    public void sortWordList() {
-        wordList.sort((d1, d2) -> {
-            if (d1.getWordCount() == d2.getWordCount()) {
-                return 0;
+    public HashMap<String, Integer> sortWordMap(HashMap<String, Integer> hashmap) {
+        ArrayList<Word> wordArrayList = new ArrayList<>();
+        for (String item : hashmap.keySet()) {
+            wordArrayList.add(new Word(item, hashmap.get(item)));
+        }
+
+        wordArrayList.sort(new Comparator<Word>() {
+            public int compare(Word d1, Word d2) {
+                if (d1.getWordCount() == d2.getWordCount()) {
+                    return 0;
+                }
+                return d1.getWordCount() > d2.getWordCount() ? -1 : 1;
             }
-            return d1.getWordCount() > d2.getWordCount() ? -1 : 1;
         });
+
+        HashMap<String, Integer> sortWordMap = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            sortWordMap.put(wordArrayList.get(i).getWord(), wordArrayList.get(i).getWordCount());
+        }
+        return sortWordMap;
+
     }
 
     public void printData() {
-        //        Print Gernes
-        for (Category cat : categoryList) {
-            cat.printCategory();
+//        Print Gernes List
+        System.out.println("=======GERNE=========");
+        for (String category : categoryMap.keySet()) {
+            System.out.println("Gerne: " + category + ", has " + categoryMap.get(category) + " movies");
         }
-
-//        Print Years
-        for (Year year : yearList) {
-            year.printYear();
+        System.out.println("=======YEARS=========");
+//        Print years list
+        for (int year : yearMap.keySet()) {
+            System.out.println("Year: " + year + ", has " + yearMap.get(year) + " movies");
         }
-
-//        Print Top 10 words
-        sortWordList();
-        for (int i = 0; i < 10; i++) {
-            wordList.get(i).printWord();
-        }
-    }
-
-    public void compineWordsList(ArrayList<Word> threadWordList) {
-        for (Word word1 : threadWordList) {
-            boolean wordExists = false;
-            for (Word word2 : wordList) {
-                if (word1.getWord().equals(word2.getWord())) {
-                    word2.addWordsCount(word1.getWordCount());
-                    wordExists = true;
-                    break;
-                }
-            }
-            if (!wordExists) {
-                wordList.add(word1);
-            }
+//        Get Sort Word List for 10 words
+        wordMap = sortWordMap(wordMap);
+//        Print top 10 words
+        System.out.println("=====TOP USED 10 WORDS=====");
+        for (String word : wordMap.keySet()) {
+            System.out.println("Word: " + word + " has " + wordMap.get(word) + " movies");
         }
     }
 
-    public void compineCategoryList(ArrayList<Category> threadCategoryList) {
-        for (Category category1 : threadCategoryList) {
-            boolean categoryExists = false;
-            for (Category category2 : categoryList) {
-                if (category1.getName().equals(category2.getName())) {
-                    category2.addMovies(category1.getMoviesCount());
-                    categoryExists = true;
-                    break;
-                }
+    public void compineWordsMap(HashMap<String, Integer> tempWordMap) {
+        for (String tempWord : tempWordMap.keySet()) {
+            int wordCount = tempWordMap.get(tempWord);
+            if (wordMap.containsKey(tempWord)) {
+                wordCount = tempWordMap.get(tempWord) + wordMap.get(tempWord);
             }
-            if (!categoryExists) {
-                categoryList.add(category1);
-            }
+            wordMap.put(tempWord, wordCount);
         }
     }
 
-    public void compineYearList(ArrayList<Year> threadYearList) {
-        for (Year year1 : threadYearList) {
-            boolean categoryExists = false;
-            for (Year year2 : yearList) {
-                if (year1.getYear() == year2.getYear()) {
-                    year2.addYears(year1.getYearCount());
-                    categoryExists = true;
-                    break;
-                }
+    public void compineCategoryMap(HashMap<String, Integer> tempCategoryMap) {
+        for (String tempCategory : tempCategoryMap.keySet()) {
+            int categoryCount = tempCategoryMap.get(tempCategory);
+            if (categoryMap.containsKey(tempCategory)) {
+                categoryCount = tempCategoryMap.get(tempCategory) + categoryMap.get(tempCategory);
             }
-            if (!categoryExists) {
-                yearList.add(year1);
-            }
+            categoryMap.put(tempCategory, categoryCount);
         }
     }
 
+    public void compineYearMap(HashMap<Integer, Integer> tempYearMap) {
+        for (int tempYear : tempYearMap.keySet()) {
+            int yearCount = tempYearMap.get(tempYear);
+            if (yearMap.containsKey(tempYear)) {
+                yearCount = tempYearMap.get(tempYear) + yearMap.get(tempYear);
+            }
+            yearMap.put(tempYear, yearCount);
+        }
+    }
 }
