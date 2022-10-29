@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7c1b2cc-1a95-435f-8e2a-64fc8c363783" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Word.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Year.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ProcessThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Question2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Question2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Word.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Year.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Year.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +62,8 @@
       <option name="presentableId" value="Default" />
       <updated>1666942142564</updated>
       <workItem from="1666942143906" duration="16770000" />
-      <workItem from="1667050112854" duration="4701000" />
+      <workItem from="1667050112854" duration="12426000" />
+      <workItem from="1667078642262" duration="833000" />
     </task>
     <servers />
   </component>

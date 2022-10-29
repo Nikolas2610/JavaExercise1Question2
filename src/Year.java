@@ -18,6 +18,10 @@ public class Year {
         this.yearCount++;
     }
 
+    public void addYears(int years) {
+        this.yearCount += years;
+    }
+
     public void printYear() {
         System.out.println("Year " + getYear() + ": has " + getYearCount() + " movies");
     }
