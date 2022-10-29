@@ -10,17 +10,40 @@ public class Movie {
     private final String splitCategoryBy = "\\|";
     private boolean correctRecord = false;
 
+    public int getYear() {
+        return year;
+    }
+
+    public int getId() {    // TODO: For DEBUG
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String[] getWordsTitle() {
+        return getTitle().toLowerCase().split("[\s(.,;)]+");
+    }
+
     public Movie(String[] movie) {
 
         try {
-            this.id = Integer.parseInt(movie[0]);
+            this.id = (int)Integer.parseInt(movie[0]);
 
             String categories;
 
 //      For movies that the title has "," | Size: 4
-            if (movie.length == 4) {
-                this.title = movie[1] + "," + movie[2];
-                categories = movie[3];
+            if (movie.length > 3) {
+                this.title = "";
+                for (int i = 1; i < movie.length-1; i++) {
+                    this.title += movie[i] + ",";
+                }
+                this.title = this.title.substring(0, this.title.length()-1);
+//                this.title = movie[1] + "," + movie[2];
+//                categories = movie[3];
+                categories = movie[movie.length-1];
+
             } else {
                 //  Size: 3
                 this.title = movie[1];
@@ -33,8 +56,10 @@ public class Movie {
                 if (isNumeric(token)) {
                     this.year = Integer.parseInt(token);
                     this.title = this.title.replace(" ("+ token + ")","");
+                    this.title = this.title.replace("\"","");
                 }
             }
+
 
 //        Split Categories
             String[] splitCategories = categories.split(splitCategoryBy);
@@ -55,6 +80,9 @@ public class Movie {
         if (strNum == null) {
             return false;
         }
+        if (strNum.contains(" ")) {
+            return false;
+        }
 
         try {
             double d = Double.parseDouble(strNum);
@@ -73,5 +101,9 @@ public class Movie {
             System.out.print(cat + " | ");
         }
         System.out.println("");
+    }
+
+    public ArrayList<String> getCategories() {
+        return categories;
     }
 }
