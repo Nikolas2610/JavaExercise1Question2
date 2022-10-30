@@ -3,13 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f7c1b2cc-1a95-435f-8e2a-64fc8c363783" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Category.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ProcessThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProcessThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Question2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Question2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Year.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +62,8 @@
       <updated>1666942142564</updated>
       <workItem from="1666942143906" duration="16770000" />
       <workItem from="1667050112854" duration="12426000" />
-      <workItem from="1667078642262" duration="7429000" />
+      <workItem from="1667078642262" duration="8494000" />
+      <workItem from="1667138444902" duration="1466000" />
     </task>
     <servers />
   </component>
